@@ -150,15 +150,16 @@ start = False
 @bot.message_handler(commands=['end'])
 def handle_end(message):
     global start, user, k
+
     if start:
         start = False
         k = 0
         user = []
         bot.send_message(message.chat.id, 'Тестирование прервано.', reply_markup=types.ReplyKeyboardRemove())
-        return
     else:
         bot.send_message(message.chat.id, 'Вы ещё не начинали тестирование.')
-        return
+
+    return
 
 
 @bot.message_handler(commands=['start'])
@@ -222,8 +223,3 @@ def get_result(usr):
 
 if __name__ == '__main__':
     bot.polling(none_stop=True)
-
-
-def get_answer(ind_block, ind_sen):
-    s = 'A' if ind_sen == 0 else 'B'
-    return str(ind_block + s)
